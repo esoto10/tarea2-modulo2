@@ -7,6 +7,7 @@ Demostración práctica de una arquitectura **SOA (Service-Oriented Architecture
 ## Tabla de contenidos
 
 - [Visión general](#visión-general)
+- [Herramientas y tecnologías](#herramientas-y-tecnologías)
 - [Arquitectura](#arquitectura)
   - [Diagrama de componentes](#diagrama-de-componentes)
   - [Diagrama de capas](#diagrama-de-capas)
@@ -21,7 +22,6 @@ Demostración práctica de una arquitectura **SOA (Service-Oriented Architecture
 - [Cómo ejecutar](#cómo-ejecutar)
   - [Opción A — Docker (recomendado)](#opción-a--docker-recomendado)
   - [Opción B — Maven local](#opción-b--maven-local)
-- [Herramientas y tecnologías](#herramientas-y-tecnologías)
 
 ---
 
@@ -32,6 +32,25 @@ El proyecto modela un sistema de gestión de personal en el que:
 1. **Servicios de negocio** (`employee-service`, `department-service`, `exchange-service`) exponen APIs REST independientes con su propia base de datos o lógica.
 2. El **ESB** (`camel-esb-service`) actúa como bus de integración: enruta peticiones, orquesta llamadas paralelas/secuenciales a los servicios de negocio y expone una API unificada al exterior.
 3. El **cliente web** (`soa-client`) consume únicamente el ESB —nunca los servicios internos directamente— mostrando los resultados en una interfaz Thymeleaf.
+
+---
+
+## Herramientas y tecnologías
+
+| Tecnología | Versión | Uso |
+|---|---|---|
+| Java | 21 | Lenguaje de programación |
+| Spring Boot | 3.5.0 | Framework base de todos los servicios |
+| Apache Camel | 4.8.0 | Motor de integración y rutas del ESB |
+| Spring Data JPA | (Boot) | Persistencia de datos ORM |
+| H2 Database | (Boot) | Base de datos embebida en memoria |
+| Lombok | (Boot) | Reducción de boilerplate (getters, builders, etc.) |
+| Thymeleaf | (Boot) | Motor de plantillas HTML del cliente web |
+| SpringDoc OpenAPI | 2.8.x | Documentación y Swagger UI |
+| Hawtio | 4.4.1 | Consola web de monitoreo de rutas Camel vía JMX |
+| Spring Actuator | (Boot) | Endpoints de salud y métricas |
+| Bean Validation | (Boot) | Validación de entidades (`@NotBlank`, `@Email`, etc.) |
+| Maven | 3.x | Gestión de dependencias y build |
 
 ---
 
@@ -380,21 +399,3 @@ mvn spring-boot:run
 
 Una vez levantados, abrir `http://localhost:8084` en el navegador e ingresar el ID de un empleado para obtener su perfil completo.
 
----
-
-## Herramientas y tecnologías
-
-| Tecnología | Versión | Uso |
-|---|---|---|
-| Java | 21 | Lenguaje de programación |
-| Spring Boot | 3.5.0 | Framework base de todos los servicios |
-| Apache Camel | 4.8.0 | Motor de integración y rutas del ESB |
-| Spring Data JPA | (Boot) | Persistencia de datos ORM |
-| H2 Database | (Boot) | Base de datos embebida en memoria |
-| Lombok | (Boot) | Reducción de boilerplate (getters, builders, etc.) |
-| Thymeleaf | (Boot) | Motor de plantillas HTML del cliente web |
-| SpringDoc OpenAPI | 2.8.x | Documentación y Swagger UI |
-| Hawtio | 4.4.1 | Consola web de monitoreo de rutas Camel vía JMX |
-| Spring Actuator | (Boot) | Endpoints de salud y métricas |
-| Bean Validation | (Boot) | Validación de entidades (`@NotBlank`, `@Email`, etc.) |
-| Maven | 3.x | Gestión de dependencias y build |
