@@ -1,0 +1,10 @@
+com\soa\employeeservice\service\EmployeeService.class
+com\soa\employeeservice\model\Employee.class
+com\soa\employeeservice\EmployeeServiceApplication.class
+com\soa\employeeservice\repository\EmployeeRepository.class
+com\soa\employeeservice\model\Employee$EmployeeBuilder.class
+com\soa\employeeservice\controller\EmployeeController.class
+com\soa\employeeservice\exception\GlobalExceptionHandler.class
+com\soa\employeeservice\config\DataLoader.class
+com\soa\employeeservice\exception\EmployeeNotFoundException.class
+com\soa\employeeservice\config\OpenApiConfig.class

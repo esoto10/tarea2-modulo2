@@ -1,0 +1,22 @@
+{
+	"folders": [
+		{
+			"path": "../../../../../../.."
+		},
+		{
+			"path": "../../../../../../../../employee-service"
+		},
+		{
+			"path": "../../../../../../../../department-service"
+		},
+		{
+			"path": "../../../../../../../../exchange-service"
+		},
+		{
+			"path": "../../../../../../../../camel-esb-service"
+		}
+	],
+	"settings": {
+		"java.compile.nullAnalysis.mode": "automatic"
+	}
+}

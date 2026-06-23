@@ -1,0 +1,14 @@
+server:
+  port: 8084
+
+esb:
+  base-url: http://localhost:8092
+  employee-profile-path: /soa/employee-profile
+
+spring:
+  application:
+    name: soa-client
+  thymeleaf:
+    cache: false
+    encoding: UTF-8
+    mode: HTML

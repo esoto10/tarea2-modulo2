@@ -1,0 +1,8 @@
+com\demo\department\service\DepartmentService.class
+com\demo\department\controller\DepartmentController.class
+com\demo\department\entity\Department$DepartmentBuilder.class
+com\demo\department\entity\Department.class
+com\demo\department\repository\DepartmentRepository.class
+com\demo\department\DepartmentServiceApplication.class
+com\demo\department\config\DataLoader.class
+com\demo\department\config\OpenApiConfig.class

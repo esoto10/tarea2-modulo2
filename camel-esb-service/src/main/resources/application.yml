@@ -1,0 +1,63 @@
+server:
+  port: 8092
+
+spring:
+  application:
+    name: camel-esb-service
+  main:
+    allow-bean-definition-overriding: true
+  jmx:
+    enabled: true          # requerido por Hawtio para exponer MBeans
+
+camel:
+  springboot:
+    name: CamelESBService
+
+# ─── Actuator + Hawtio 4.x ────────────────────────────────────────────────────
+# Hawtio 4.x expone la consola como endpoint de Actuator.
+# Con base-path=/ la URL queda en http://localhost:8082/hawtio
+management:
+  endpoints:
+    web:
+      base-path: /
+      exposure:
+        include: hawtio,jolokia,health,info,metrics
+  endpoint:
+    hawtio:
+      enabled: true
+    jolokia:
+      enabled: true
+      config:
+        debug: false
+
+# ─── Hawtio ────────────────────────────────────────────────────────────────────
+# Acceso: http://localhost:8082/hawtio
+hawtio:
+  authenticationEnabled: false
+
+# ─── Springdoc / Swagger UI ────────────────────────────────────────────────────
+# El Swagger UI se sirve en /swagger-ui.html
+# El spec OpenAPI es generado por camel-openapi-java en /api-doc
+springdoc:
+  api-docs:
+    enabled: false          # desactiva la generación propia de springdoc
+  swagger-ui:
+    path: /swagger-ui.html
+    url: /api-doc           # apunta al spec generado por Camel
+
+# ─── URLs de servicios backend (configurables por ambiente) ──────────────────
+services:
+  employee:
+    url: http://localhost:8082
+  exchange:
+    url: http://localhost:8091
+  department:
+    url: http://localhost:8083
+
+# ─── Logging ───────────────────────────────────────────────────────────────────
+logging:
+  level:
+    root: INFO
+    org.apache.camel: INFO
+    com.demo.camel: DEBUG
+    io.hawt: INFO

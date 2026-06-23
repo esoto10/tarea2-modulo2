@@ -1,0 +1,12 @@
+com\demo\camel\CamelEsbServiceApplication.class
+com\demo\camel\route\EmployeeRoute.class
+com\demo\camel\dto\ExchangeRateDTO.class
+com\demo\camel\route\DepartmentRoute.class
+com\demo\camel\dto\DepartmentDTO.class
+com\demo\camel\route\EmployeeProfileRoute.class
+com\demo\camel\route\ExchangeRoute.class
+com\demo\camel\dto\EmployeeProfileResponse.class
+com\demo\camel\dto\EmployeeDTO.class
+com\demo\camel\route\RestConfigurationRoute.class
+com\demo\camel\processor\EmployeeProfileProcessor.class
+com\demo\camel\config\HawtioConfig.class

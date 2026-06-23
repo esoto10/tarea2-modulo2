@@ -1,0 +1,12 @@
+server:
+  port: 8091
+
+spring:
+  application:
+    name: exchange-service
+
+springdoc:
+  swagger-ui:
+    path: /swagger-ui.html
+  api-docs:
+    path: /v3/api-docs

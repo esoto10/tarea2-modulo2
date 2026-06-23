@@ -1,0 +1,14 @@
+{
+    "configurations": [
+        {
+            "type": "java",
+            "name": "Spring Boot-SoaClientApplication<soa-client>",
+            "request": "launch",
+            "cwd": "${workspaceFolder}",
+            "mainClass": "com.soa.client.SoaClientApplication",
+            "projectName": "soa-client",
+            "args": "",
+            "envFile": "${workspaceFolder}/.env"
+        }
+    ]
+}
