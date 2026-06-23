@@ -122,20 +122,41 @@ El proyecto modela un sistema de gestión de personal en el que:
 
 ### Flujo de la API compuesta
 
-`GET /soa/employee-profile/{id}` orquesta tres servicios en secuencia:
+El siguiente diagrama muestra el recorrido completo de una petición, desde que el usuario ingresa un ID en el navegador hasta que recibe la respuesta con el perfil del empleado:
 
-```
-Cliente  →  ESB  →  1. employee-service  GET /api/empleados/{id}
-                         ↓  EmployeeDTO (nombre, cargo, salarioPEN, departmentId)
-                    2. department-service  GET /api/departments/{departmentId}
-                         ↓  DepartmentDTO (nombre del departamento)
-                    3. exchange-service    GET /api/exchange/usd
-                         ↓  ExchangeRateDTO (rate PEN→USD)
-                    4. EmployeeProfileProcessor
-                         salarioUSD = salarioPEN × rate
-                         ↓  EmployeeProfileResponse
-         ←  ESB  ←  { id, nombre, apellido, cargo, departamento,
-                       salarioPEN, tipoCambio, salarioUSD }
+```mermaid
+sequenceDiagram
+    actor Usuario as 👤 Usuario
+    participant Browser as Navegador<br/>(localhost:8084)
+    participant Client as soa-client<br/>HomeController
+    participant ESB as camel-esb-service<br/>EmployeeProfileRoute
+    participant EmpSvc as employee-service<br/>(localhost:8082)
+    participant DeptSvc as department-service<br/>(localhost:8083)
+    participant ExchSvc as exchange-service<br/>(localhost:8091)
+    participant Proc as EmployeeProfile<br/>Processor
+
+    Usuario->>Browser: Ingresa ID de empleado y presiona Buscar
+    Browser->>Client: GET /?id=1
+    Client->>ESB: GET /soa/employee-profile/1<br/>(RestClient)
+
+    Note over ESB: Inicio de orquestación<br/>employee-profile-route
+
+    ESB->>EmpSvc: GET /api/empleados/1
+    EmpSvc-->>ESB: EmployeeDTO<br/>{nombre, cargo, salarioPEN, departmentId}
+
+    ESB->>DeptSvc: GET /api/departments/{departmentId}
+    DeptSvc-->>ESB: DepartmentDTO<br/>{nombre del departamento}
+
+    ESB->>ExchSvc: GET /api/exchange/usd
+    ExchSvc-->>ESB: ExchangeRateDTO<br/>{base: PEN, target: USD, rate: 0.2805}
+
+    ESB->>Proc: process(employee + department + exchangeRate)
+    Note over Proc: salarioUSD = salarioPEN × rate
+    Proc-->>ESB: EmployeeProfileResponse
+
+    ESB-->>Client: JSON { id, nombre, apellido, cargo,<br/>departamento, salarioPEN,<br/>tipoCambio, salarioUSD }
+    Client-->>Browser: Model con perfil → index.html
+    Browser-->>Usuario: 📄 Perfil completo del empleado
 ```
 
 ---
